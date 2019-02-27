@@ -11,27 +11,27 @@ import math
 
 def make_translate( x, y, z ):
 
-    dilation = [[x, 0, 0, 0], [0, y, 0, 0], [0,0, z, 0], [0, 0, 0, 1]]
+    dilation = [[1, 0, 0, 0], [0, 1, 0, 0], [0,0, 1, 0], [x, y, z, 1]]
 
     return dilation
 
 def make_scale( x, y, z ):
-    translation = [[1, 0, 0, x], [0, 1, 0, y], [0, 0, 1, z], [0, 0, 0, 1]]
+    translation = [[x, 0, 0, 0], [0, y, 0, 0], [0, 0, z, 0], [0, 0, 0, 1]]
 
     return translation
 
 def make_rotX( theta ):
-    rotX = [[1, 0, 0, 0], [0, math.cos(theta), -1 * math.sin(theta), 0, 0], [0, math.sin(theta), math.cos(theta), 0], [0, 0, 0, 1]]
+    rotX = [[1, 0, 0, 0], [0, math.cos(math.radians(theta)), math.sin(math.radians(theta)), 0, 0], [0, -1 * math.sin(math.radians(theta)), math.cos(math.radians(theta)), 0], [0, 0, 0, 1]]
 
     return rotX
 
 def make_rotY( theta ):
-    rotY = [[math.cos(theta), 0, math.sin(theta), 0], [0, 1, 0, 0], [-1 * math.sin(theta), 0, math.cos(theta), 0], [0, 0, 0, 1]]
+    rotY = [[math.cos(math.radians(theta)), 0, 0, -1 * math.sin(math.radians(theta))], [0, 1, 0, 0], [math.sin(math.radians(theta)), 0, 0, math.cos(math.radians(theta))], [0, 0, 0, 1]]
 
     return rotY
 
 def make_rotZ( theta ):
-    rotZ = [[math.cos(theta), -1 * math.sin(theta), 0, 0], [math.sin(theta), math.cos(theta), 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+    rotZ = [[math.cos(math.radians(theta)), math.sin(math.radians(theta)), 0, 0], [-1 * math.sin(math.radians(theta)), math.cos(math.radians(theta)), 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
 
     return rotZ
 
@@ -69,6 +69,8 @@ def matrix_mult( m1, m2 ):
                             m1[1][r] * tmp[1] +
                             m1[2][r] * tmp[2] +
                             m1[3][r] * tmp[3])
+
+
         point+= 1
 
 

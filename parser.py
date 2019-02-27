@@ -32,31 +32,78 @@ The file follows the following format:
 
 See the file script for an example of the file format
 """
+
+screen = new_screen()
+color = [255, 0, 0]
+
 def parse_file( fname, points, transform, screen, color ):
     f = open(fname, "r")
 
     lines = f.readlines()
 
-    for l in lines:
+    for i in range(len(lines)):
 
-        if "line" in l:
+        if "line" in lines[i]:
+            i += 1
+            l = map(int, lines[i].split())
+            add_edge(points, l[0], l[1], l[2], l[3], l[4], l[5])
 
-        elif "ident" in l:
+        elif "ident" in lines[i]:
+            ident(transform)
 
-        elif "scale" in l:
+        elif "scale" in lines[i]:
+            i += 1
+            l = map(int, lines[i].split())
 
-        elif "translate" in l:
+            matrix_mult(make_scale(l[0], l[1], l[2]), transform)
 
-        elif "rotate" in l:
+        elif "translate" in lines[i]:
+            i += 1
+            l = map(int, lines[i].split())
 
-        elif "apply" in l:
+            matrix_mult(make_translate(l[0], l[1], l[2]), transform)
 
-        elif "display" in l:
+        elif "rotate" in lines[i]:
+            i += 1
+            l = lines[i].split()
+            l[1] = int(l[1])
 
-        elif "save" in l:
+            if l[0] == 'x':
+                matrix_mult(make_rotX(l[1]), transform)
 
-        elif "quit" in l:
+            elif l[0] == 'y':
+                matrix_mult(make_rotY(l[1]), transform)
+
+            elif l[0] == 'z':
+                matrix_mult(make_rotZ(l[1]), transform)
+
+            else:
+                print("Axis cannot be computed")
+
+        elif "apply" in lines[i]:
+            matrix_mult(transform, points)
+
+        elif "display" in lines[i]:
+            for i in range(len(points)):
+				for j in range(len(points[0])):
+					points[i][j] = int(points[i][j])
+            clear_screen(screen)
+            draw_lines(points, screen, color)
+            display(screen)
+
+        elif "save" in lines[i]:
+            clear_screen(screen)
+            draw_lines(points, screen, color)
+            i += 1
+            l = lines[i].strip()
+
+            save_extension(screen, l)
+
+        elif "quit" in lines[i]:
+            i = len(lines)
 
         else:
 
             print("What Command?")
+
+        print_matrix(points)
