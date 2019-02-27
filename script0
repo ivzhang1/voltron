@@ -1,0 +1,50 @@
+line
+250 150 0 150 250 0
+line
+250 150 0 350 250 0
+line
+150 250 0 200 320 0
+line
+200 320 0 250 300 0
+line
+250 300 0 300 320 0
+line
+300 320 0 350 250 0
+line
+250 150 50 150 250 50
+line
+250 150 50 350 250 50
+line
+150 250 50 200 320 50
+line
+200 320 50 250 300 50
+line
+250 300 50 300 320 50
+line
+300 320 50 350 250 50
+ident
+scale
+2 2 2
+apply
+display
+ident
+translate
+100 100 0
+apply
+display
+ident
+rotate
+z 20
+rotate
+x 20
+rotate
+y 20
+apply
+display
+ident
+rotate
+y 20
+apply
+display
+save
+pic.png
