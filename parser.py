@@ -45,7 +45,7 @@ def parse_file( fname, points, transform, screen, color ):
 
         if "line" in lines[i]:
             i += 1
-            print(lines[i], i)
+            #print(lines[i], i)
             l = map(int, lines[i].split())
             add_edge(points, l[0], l[1], l[2], l[3], l[4], l[5])
 
@@ -77,7 +77,7 @@ def parse_file( fname, points, transform, screen, color ):
 
             elif l[0] == 'z':
                 matrix_mult(make_rotZ(l[1]), transform)
-                
+
         elif "apply" in lines[i]:
             matrix_mult(transform, points)
 
@@ -100,5 +100,5 @@ def parse_file( fname, points, transform, screen, color ):
         elif "quit" in lines[i]:
             i = len(lines)
 
-        f.close()
-        print_matrix(points)
+        #f.close()
+        #print_matrix(points)
